@@ -52,7 +52,7 @@
       data: {
         name: "李小龙",
       },
-    })
+    });
   </script>
 </body>
 ```
@@ -83,7 +83,7 @@
       data: {
         link: `<a href='http://www.baidu.com'>这里是百度aka 摆渡</a>`,
       },
-    })
+    });
   </script>
 </body>
 ```
@@ -105,7 +105,7 @@
       data: {
         name: "李小龙",
       },
-    })
+    });
   </script>
 </body>
 ```
@@ -132,7 +132,7 @@ v-pre 用于跳过这个元素和它子元素的编译过程，用于显示原�
       data: {
         name: "李小龙",
       },
-    })
+    });
   </script>
 </body>
 ```
@@ -164,8 +164,8 @@ v-pre 用于跳过这个元素和它子元素的编译过程，用于显示原�
         data: {
           name: "李小龙",
         },
-      })
-    }, 2000)
+      });
+    }, 2000);
   </script>
 </body>
 ```
@@ -332,10 +332,10 @@ v-pre 用于跳过这个元素和它子元素的编译过程，用于显示原�
       },
       computed: {
         fullName() {
-          return this.firstName + " " + this.lastName
+          return this.firstName + " " + this.lastName;
         },
       },
-    })
+    });
   </script>
 </body>
 ```
@@ -366,14 +366,14 @@ v-pre 用于跳过这个元素和它子元素的编译过程，用于显示原�
         fullName: {
           //基本上很少使用set属性，需要改变计算属性时，直接改变data属性的值 计算属性就会改变
           set: function (value) {
-            console.log(value)
+            console.log(value);
           },
           get: function () {
-            return this.firstName + " " + this.lastName
+            return this.firstName + " " + this.lastName;
           },
         },
       },
-    })
+    });
   </script>
 </body>
 ```
@@ -401,17 +401,17 @@ v-pre 用于跳过这个元素和它子元素的编译过程，用于显示原�
       },
       methods: {
         getFullName() {
-          console.log("methods")
-          return this.firstName + " " + this.lastName
+          console.log("methods");
+          return this.firstName + " " + this.lastName;
         },
       },
       computed: {
         fullName() {
-          console.log("computed")
-          return this.firstName + " " + this.lastName
+          console.log("computed");
+          return this.firstName + " " + this.lastName;
         },
       },
-    })
+    });
   </script>
 </body>
 ```
@@ -457,13 +457,13 @@ v-pre 用于跳过这个元素和它子元素的编译过程，用于显示原�
       },
       methods: {
         add() {
-          this.number++
+          this.number++;
         },
         substract() {
-          this.number--
+          this.number--;
         },
       },
-    })
+    });
   </script>
 </body>
 ```
@@ -492,16 +492,16 @@ v-pre 用于跳过这个元素和它子元素的编译过程，用于显示原�
       },
       methods: {
         add(event) {
-          console.log(event)
-          this.number++
+          console.log(event);
+          this.number++;
         },
         substract(number, event) {
-          console.log(event)
-          console.log(number)
-          this.number -= number
+          console.log(event);
+          console.log(number);
+          this.number -= number;
         },
       },
-    })
+    });
   </script>
 </body>
 ```
@@ -605,7 +605,8 @@ Vue 的条件指令可以根据表达式的值在 DOM 中渲染或销毁元素�
   - v-for 的语法类似于 JavaScript 中的 for 循环。
   - 格式如下：item in items 的形式。
 
-- 我们来看一个简单的案例：
+### 数组遍历
+
 - 如果在遍历的过程中不需要使用索引值
   - v-for="date in dateList"
   - 依次从 dateList 中取出 date，并且在元素的内容中，我们可以使用 Mustache 语法，来使用 date
@@ -617,15 +618,29 @@ Vue 的条件指令可以根据表达式的值在 DOM 中渲染或销毁元素�
 ```
 
 - 如果在遍历的过程中，我们需要拿到元素在数组中的索引值呢？
-  - 语法格式：v-for=(item, index) in items
+  - 语法格式：v-for=(date, index) in items
   - 其中的 index 就代表了取出的 item 在原数组的索引值。
 
 ```html
-<div id="app">
-  <ul>
-    <li v-for="(item, index) in dateList">value={{item}},index={{index}}</li>
-  </ul>
-</div>
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="(date, index) in dateList">
+        value={{date}},index={{index}}
+      </li>
+    </ul>
+  </div>
+
+  <script src="../../vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        dateList: ["2020年1月", "2020年2月", "2020年3月"],
+      },
+    });
+  </script>
+</body>
 ```
 
 ### v-for 遍历对象
@@ -668,7 +683,80 @@ v-for 可以用户遍历对象：
           height: "1.88",
         },
       },
-    })
+    });
   </script>
 </body>
 ```
+
+### 组件的 key 属性
+
+- 官方推荐我们在使用 v-for 时，给对应的元素或组件添加上一个:key 属性。
+- 为什么需要这个 key 属性呢（了解）？
+- 这个其实和 Vue 的虚拟 DOM 的 Diff 算法有关系。
+
+- 首先和大家讲一下
+  - 我们都知道重绘和回流，回流会导致 dom 重新渲染，比较耗性能；而虚拟 dom 就是用一个对象去代替 dom 对象，当有多次更新 dom 的动作时，不会立即更新 dom，而是将变化保存到一个对象中，最终一次性将改变渲染出来。
+
+什么是重绘?什么是回流?
+
+```
+说简单的人话，能听懂的：
+重绘：就是当页面上的宽高，布局，显示或者隐藏没有改变，但是颜色啊什么的元素风格发生改变就是重绘。
+回流:就是页面上的宽高布局等基本骨架发生改变的时候就叫做回流。
+定义概念： 重绘不一定会触发回流，而回流一定会触发重绘。
+```
+
+- 形式
+
+```html
+<div>
+  <p></p>
+  <span></span>
+</div>
+```
+
+以上代码转换成 virtual dom 就是如下形式（当然省去了很多其他属性）
+
+```json
+{
+  "tag": "div",
+  "children": [
+    {
+      "tag": "p"
+    },
+    {
+      "tag": "span"
+    }
+  ]
+}
+```
+
+**diff 原理**
+首先当然是附上这张经典的图
+图中很清楚的说明了，diff 的比较过程只会在同层级比较，不会跨级比较。
+diff 算法是一个交叉对比的过程，大致可以简要概括为：头头比较、尾尾比较、头尾比较、尾头比较
+这里我就不做过多说明
+![1595420399_1_.jpg](https://i.loli.net/2020/07/22/jd6Gvo8sOiTFYzD.png)
+
+diff 过程简单来说就是有一个 sameVnode 函数，其源码可以简化为如下：
+也就是说，判断两个节点是否为同一节点（也就是是否可复用），标准是 key 相同且 tag 相同。
+
+```js
+function sameVnode(a, b) {
+  return a.key === b.key && a.tag === b.tag;
+}
+```
+
+- 当某一层有很多相同的节点时，也就是列表节点时，我们希望插入一个新的节点
+  - 我们希望可以在 B 和 C 之间加一个 F，Diff 算法默认执行起来是这样的。
+  - 即把 C 更新成 F，D 更新成 C，E 更新成 D，最后再插入 E，是不是很没有效率？
+- 所以我们需要使用 key 来给每个节点做一个唯一标识
+
+  - Diff 算法就可以正确的识别此节点
+  - 找到正确的位置区插入新的节点。
+
+  ![1595420508_1_.jpg](https://i.loli.net/2020/07/22/CnuTl972f5Xx6Zt.png)
+  ![1595420555_1_.jpg](https://i.loli.net/2020/07/22/mMsKHI2JkNFESCL.png)
+  ![1595420573_1_.jpg](https://i.loli.net/2020/07/22/bL46KVZzk578Wc1.png)
+
+- 所以一句话，key 的作用主要是为了高效的更新虚拟 DOM。
