@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>切换登录案例</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- vue会创建虚拟dom，当key相同时vue 标签可复用，key不一样时会重新渲染 -->
+    <span v-if='isShow'>
+      <label for="username">用户名</label>
+      <input type="text" id="username" placeholder="用户账号" key="username">
+    </span>
+    <span v-else>
+      <label for="email">邮箱号</label>
+      <input type="text" id="email" placeholder="用户邮箱" key='username1'>
+    </span>
+    <button @click='loginSwitch()'>切换登录</button>
+  </div>
+
+  <script src="../../vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello Vue.js',
+        msg1: 'hello 张无忌',
+        isShow: true
+      },
+      methods: {
+        loginSwitch() {
+          this.isShow = !this.isShow
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

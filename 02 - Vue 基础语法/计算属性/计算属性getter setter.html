@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<script src="../../vue.js"></script>
+
+<body>
+  <div id="app">
+    {{fullName}}
+  </div>
+  <script>
+    let app = new Vue({
+      el: "#app",
+      data: {
+        firstName: 'Kobe',
+        lastName: 'Bryant'
+      },
+      computed: {
+        //使用getter 和 setter时 fuallName要使用对象面不是function
+        //不使用getter 和 setter时,默认使用的是getter所以computed里常看到都是以function存在
+        fullName: {
+          //基本上很少使用set属性，需要改变计算属性时，直接改变data属性的值 计算属性就会改变
+          set: function (value) {
+            console.log(value)
+          },
+          get: function () {
+            return this.firstName + ' ' + this.lastName
+          }
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

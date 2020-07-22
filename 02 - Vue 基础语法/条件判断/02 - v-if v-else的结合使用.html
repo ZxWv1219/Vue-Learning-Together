@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-if的使用</title>
+</head>
+
+<body>
+  <div id="app">
+    <div v-if='isShow'>{{msg}}</div>
+    <div v-else>{{msg1}}</div>
+    <button @click='showAndHide()'>显示和隐藏</button>
+  </div>
+
+  <script src="../../vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',//绑定需要管理的element
+      data: {
+        msg: 'hello Vue.js',
+        msg1: 'hello 张无忌',
+        isShow: true
+      },
+      methods: {
+        showAndHide() {
+          this.isShow = !this.isShow
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

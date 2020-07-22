@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for添加key</title>
+</head>
+
+<body>
+    <div id="list">
+        <ul>
+            <!-- 添加key时性能更高,且key要保证唯一性 -->
+            <!-- li0 a -->
+            <!-- li1 b -->
+            <!-- li5 f -->
+            <!-- li2 c -->
+            <!-- li3 d -->
+            <!-- li4 e -->
+
+            <!-- 没有指定key,当我要添加一个远程f且位置不是最后时, -->
+            <!-- li0 a -->
+            <!-- li1 b -->
+            <!-- li2 f -->
+            <!-- li3 c -->
+            <!-- li4 d -->
+            <!-- li5 e -->
+            <li v-for="(item, index) in dateList" :key="item">value={{item}},index={{index}}</li>
+            <button @click='add'>add</button>
+            <button @click='btnChange'>btnChange</button>
+        </ul>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#list',
+            data: {
+                dateList: ['2020年1月', '2020年2月', '2020年3月']
+            },
+            methods: {
+                add() {
+                    //数组的push方法可以做到响应式
+                    this.dateList.push('2020年3月')
+                },
+                btnChange() {
+                    //直接修改数组值时为什么做不了响应式？   vue内部并没有这样的监听，必需通过其它办法进行修改数组值。
+                    //this.dateList[0] = '2020年12月'
+                    // .splice的作用 删除元素/插入元素/替换元素
+                    //this.dateList.splice(1, 1)
+                    // (index,num,newValue)第一个参数表示修改元素的位置,建议使用
+                    //this.dateList.splice(0, 1, '已经修改')
+                    //(item,index,newValue)第一个参数表示修改元素的位置
+                    // Vue.set(this.dateList, 0, '已经修改Vue')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

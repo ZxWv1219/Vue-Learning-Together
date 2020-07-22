@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-else-if的使用</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 不建议使用elsif，逻辑过与复杂时，建议把逻辑写在方法里边可读性更高 -->
+    <div v-if='total > 10 && total < 20'>{{msg}}</div>
+    <div v-else-if='total>20 && total< 30'>{{msg1}}</div>
+    <div v-else>{{msg2}}</div>
+  </div>
+
+  <script src=".././vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',//绑定需要管理的element
+      data: {
+        msg: 'hello Vue.js',
+        msg1: 'hello 张无忌',
+        msg2: 'hello 张三丰',
+        total: 10,
+        isShow: true
+      }
+    })
+  </script>
+</body>
+
+</html>

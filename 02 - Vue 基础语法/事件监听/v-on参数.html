@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<script src="../../vue.js"></script>
+
+<body>
+  <div id="app">
+    <div>{{number}}</div>
+    <button v-on:click='number++'>+</button>
+    <button @click='number--'>-</button><br>
+    <button v-on:click='add'>+</button>
+    <button @click='substract(20,$event)'>-</button>
+  </div>
+  <script>
+    let app = new Vue({
+      el: "#app",
+      data: {
+        number: 0
+      },
+      methods: {
+        add(event) {
+          console.log(event)
+
+          this.number++
+        },
+        substract(number, event) {
+          console.log(event)
+          console.log(number)
+          this.number -= number
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-show的使用</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 区别：查看html元素 
+             当v-if 值为false时 vue把标签从dom中删除当值为true时会重新添加到dom中，
+             而show 只是添加一个行内样式display 为none
+             show的性能是要优于if的
+            -->
+    <div v-if='isShow' id="divIf">{{msg}}</div>
+    <div v-show='isShow' id='divShow'>{{msg1}}</div>
+    <button @click='showAndHide()'>显示和隐藏</button>
+  </div>
+
+  <script src="../../vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',//绑定需要管理的element
+      data: {
+        msg: 'hello Vue.js',
+        msg1: 'hello 张无忌',
+        isShow: true
+      },
+      methods: {
+        showAndHide() {
+          this.isShow = !this.isShow
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

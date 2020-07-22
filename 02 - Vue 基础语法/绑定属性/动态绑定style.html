@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-bind的基本使用</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 
+      动态绑定时CSS属性使用小驼峰,
+      如果使用‘-’ 写法需要加单引号'font-size' 而不是font-size,
+      使用'-'时会解析成运算符号，
+      且value 使用单引号时会解析成字符串，不使用单引号时解析成变量
+    -->
+    <a v-bind:href="baidu" :style="{'font-size':fontSize}">百度一下</a><br />
+    <a v-bind:href="baidu" :style="{'font-size':'50px'}">百度一下</a><br />
+    <a v-bind:href="baidu" :style="getStyle()">百度一下</a><br />
+    <!-- 数组语法 -->
+    <a v-bind:href="baidu" :style="[style1,style2]">百度一下</a><br />
+  </div>
+  <script src="../../vue.js"></script>
+  <script>
+    const myApp = new Vue({
+      el: '#app',
+      data: {
+        url: 'https://dss0.bdstatic.com/6Ox1bjeh1BF3odCf/it/u=1865562763,4264811206&fm=74&app=80&f=PNG&size=f121,90?sec=1880279984&t=6fad050c58c2d6d624e24e4a5e01f858',
+        baidu: 'http://www.baidu.com',
+        fontSize: '50px',
+        style1: { fontSize: '60px' },
+        style2: { backgroundColor: 'yellow' }
+      },
+      methods: {
+        btnClick: function () {
+          this.isActive = !this.isActive
+        },
+        getStyle: function () {
+          return { fontSize: this.fontSize, backgroundColor: 'green' }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

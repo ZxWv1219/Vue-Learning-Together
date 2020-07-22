@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-for遍历对象</title>
+</head>
+
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="item in userInfo">value={{item}}</li>
+    </ul>
+    <ul>
+      <!-- (value,key) -->
+      <li v-for="(item,key) in userInfo">value={{item}},key={{key}}</li>
+    </ul>
+    <ul>
+      <!-- (value,key,index) -->
+      <li v-for="(item,key,index) in userInfo">value={{item}},key={{key}},index={{index}}</li>
+    </ul>
+    <ul>
+      <!-- 属性过多时不建议这样写 -->
+      <li>{{userInfo.name}}</li>
+      <li>{{userInfo.age}}</li>
+      <li>{{userInfo.height}}</li>
+    </ul>
+  </div>
+
+  <script src="../../vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        userInfo: {
+          name: '张无忌',
+          age: '18',
+          height: '1.88'
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

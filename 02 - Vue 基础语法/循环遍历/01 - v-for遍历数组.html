@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-for遍历数组</title>
+</head>
+
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="(item, index) in dateList">value={{item}},index={{index}}</li>
+    </ul>
+  </div>
+
+  <script src="../../vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        dateList: ['2020年1月', '2020年2月', '2020年3月']
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<script src="../../vue.js"></script>
+
+<body>
+  <div id="app">
+    <a v-bind:href="link">这里是百度aka 摆渡</a>
+    <img v-bind:src="imgUrl">{{name}}</img>
+  </div>
+  <script>
+    let app = new Vue({
+      el: "#app",
+      data: {
+        imgUrl: "https://i.loli.net/2020/07/22/eK3ZIvk9ulyJ8mq.png",
+        link: 'https://www.baidu.com/'
+      }
+    })
+  </script>
+</body>
+
+</html>

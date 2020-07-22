@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active {
+      color: red;
+    }
+
+    .line {
+      border-bottom: 1px solid #111;
+    }
+  </style>
+</head>
+<script src="../../vue.js"></script>
+
+<body>
+  <div id="app">
+    <!-- 用法一：直接通过[]绑定一个类 -->
+    <h2 :class="['active']">Hello World</h2>
+
+    <!-- 用法二：也可以通过判断，传入多个值 -->
+    <h2 :class="['active','line']">Hello World</h2>
+
+    <!-- 用法三：和普通的类同时存在，并不冲突 -->
+    <!-- 注：如果isActive和isLine都为true，那么会有title/active/line三个类 -->
+    <h2 class="title" :class="['active', 'line']">Hello World</h2>
+
+    <!-- 用法四：如果过于复杂，可以放在一个methods或者computed中 -->
+
+    <!-- 注：getClasses是一个方法使用时不能省略掉括号 ()  -->
+    <h2 class="title" :class="getClasses()">Hello World</h2>
+    <!-- 注：classes是一个计算属性使用计算属性时些处可以省略掉括号 ()  -->
+    <h2 class="title" :class="classes">Hello World</h2>
+  </div>
+  <script>
+    let app = new Vue({
+      el: "#app",
+      data: {
+        isActive: true,
+        isLine: true,
+        actives: ['red', 'black', 'green']
+      },
+      methods: {
+        //es5方法写法
+        getClasses: function () {
+          return this.actives
+        }
+      },
+      computed: {
+        classes() {
+          return this.actives
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
