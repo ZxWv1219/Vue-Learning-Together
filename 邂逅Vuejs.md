@@ -105,8 +105,8 @@ let app = new Vue({
 <ul>
 <li v-for='item in books'>
 {{item}}
-<li>
-<ul>
+</li>
+</ul>
 </div>
 ```
 
