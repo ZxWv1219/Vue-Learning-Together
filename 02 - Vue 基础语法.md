@@ -52,7 +52,7 @@
       data: {
         name: "李小龙",
       },
-    });
+    })
   </script>
 </body>
 ```
@@ -83,7 +83,7 @@
       data: {
         link: `<a href='http://www.baidu.com'>这里是百度aka 摆渡</a>`,
       },
-    });
+    })
   </script>
 </body>
 ```
@@ -105,7 +105,7 @@
       data: {
         name: "李小龙",
       },
-    });
+    })
   </script>
 </body>
 ```
@@ -132,7 +132,7 @@ v-pre 用于跳过这个元素和它子元素的编译过程，用于显示原�
       data: {
         name: "李小龙",
       },
-    });
+    })
   </script>
 </body>
 ```
@@ -164,8 +164,8 @@ v-pre 用于跳过这个元素和它子元素的编译过程，用于显示原�
         data: {
           name: "李小龙",
         },
-      });
-    }, 2000);
+      })
+    }, 2000)
   </script>
 </body>
 ```
@@ -332,10 +332,10 @@ v-pre 用于跳过这个元素和它子元素的编译过程，用于显示原�
       },
       computed: {
         fullName() {
-          return this.firstName + " " + this.lastName;
+          return this.firstName + " " + this.lastName
         },
       },
-    });
+    })
   </script>
 </body>
 ```
@@ -366,14 +366,14 @@ v-pre 用于跳过这个元素和它子元素的编译过程，用于显示原�
         fullName: {
           //基本上很少使用set属性，需要改变计算属性时，直接改变data属性的值 计算属性就会改变
           set: function (value) {
-            console.log(value);
+            console.log(value)
           },
           get: function () {
-            return this.firstName + " " + this.lastName;
+            return this.firstName + " " + this.lastName
           },
         },
       },
-    });
+    })
   </script>
 </body>
 ```
@@ -401,17 +401,17 @@ v-pre 用于跳过这个元素和它子元素的编译过程，用于显示原�
       },
       methods: {
         getFullName() {
-          console.log("methods");
-          return this.firstName + " " + this.lastName;
+          console.log("methods")
+          return this.firstName + " " + this.lastName
         },
       },
       computed: {
         fullName() {
-          console.log("computed");
-          return this.firstName + " " + this.lastName;
+          console.log("computed")
+          return this.firstName + " " + this.lastName
         },
       },
-    });
+    })
   </script>
 </body>
 ```
@@ -457,13 +457,13 @@ v-pre 用于跳过这个元素和它子元素的编译过程，用于显示原�
       },
       methods: {
         add() {
-          this.number++;
+          this.number++
         },
         substract() {
-          this.number--;
+          this.number--
         },
       },
-    });
+    })
   </script>
 </body>
 ```
@@ -492,16 +492,16 @@ v-pre 用于跳过这个元素和它子元素的编译过程，用于显示原�
       },
       methods: {
         add(event) {
-          console.log(event);
-          this.number++;
+          console.log(event)
+          this.number++
         },
         substract(number, event) {
-          console.log(event);
-          console.log(number);
-          this.number -= number;
+          console.log(event)
+          console.log(number)
+          this.number -= number
         },
       },
-    });
+    })
   </script>
 </body>
 ```
@@ -638,7 +638,7 @@ Vue 的条件指令可以根据表达式的值在 DOM 中渲染或销毁元素�
       data: {
         dateList: ["2020年1月", "2020年2月", "2020年3月"],
       },
-    });
+    })
   </script>
 </body>
 ```
@@ -683,7 +683,7 @@ v-for 可以用户遍历对象：
           height: "1.88",
         },
       },
-    });
+    })
   </script>
 </body>
 ```
@@ -743,7 +743,7 @@ diff 过程简单来说就是有一个 sameVnode 函数，其源码可以简化�
 
 ```js
 function sameVnode(a, b) {
-  return a.key === b.key && a.tag === b.tag;
+  return a.key === b.key && a.tag === b.tag
 }
 ```
 
@@ -760,3 +760,20 @@ function sameVnode(a, b) {
   ![1595420573_1_.jpg](https://i.loli.net/2020/07/22/bL46KVZzk578Wc1.png)
 
 - 所以一句话，key 的作用主要是为了高效的更新虚拟 DOM。
+
+### 检测数组更新
+
+因为 Vue 是响应式的，所以当数据发生变化时，Vue 会自动检测数据变化，视图会发生对应的更新。
+Vue 中包含了一组观察数组编译的方法，使用它们改变数组也会触发视图的更新。
+
+- push()
+- pop()
+- shift()
+- unshift()
+- splice()
+- sort()
+- reverse()
+
+## 购物车案例
+
+![1595464630_1_.jpg](https://i.loli.net/2020/07/23/3e4kxpWHKtnmqSw.png)
