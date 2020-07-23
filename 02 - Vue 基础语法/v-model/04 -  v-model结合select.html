@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-model结合select</title>
+</head>
+
+<body>
+    <div id="app">
+
+        <select v-model="name">
+            <option value="财神">财神</option>
+            <option value="周杰伦">周杰伦</option>
+            <option value="张学友">张学友</option>
+            <option value="张无忌">张无忌</option>
+        </select>
+        <h2>你的选择是：{{name}}</h2><br>
+        <select v-model="names" multiple>
+            <option value="财神">财神</option>
+            <option value="周杰伦">周杰伦</option>
+            <option value="张学友">张学友</option>
+            <option value="张无忌">张无忌</option>
+        </select>
+        <h2>你选择的是：{{names}}</h2>
+    </div>
+
+    <script src="../../vue.js"></script>
+    <script>
+        const myApp = new Vue({
+            el: '#app',//绑定需要管理的element
+            data: {
+                msg: 'hello Vue.js',
+                name: '张无忌',
+                names: []
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

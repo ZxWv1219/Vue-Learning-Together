@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>父组件与子组件</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- 使用组件 -->
+      <my-father></my-father>
+    </div>
+    <script src="../../vue.js"></script>
+    <script>
+      //先构造子组件
+      const son = Vue.extend({
+        template: `
+            <div>
+            <h2>我是子组件</h2>
+            </div>
+            `,
+      })
+      //在构造父组件
+      const father = Vue.extend({
+        template: `
+            <div>
+            <h2>我是父组件</h2>
+            <my-son></my-son>
+            </div>
+            `,
+        components: {
+          "my-son": son,
+        },
+      })
+      //vue实例就是一个 ROOT 组件
+      const app = new Vue({
+        el: "#app", //绑定需要管理的element
+        data: {
+          msg: "hello Vue.js",
+        },
+        components: {
+          "my-father": father,
+        },
+      })
+    </script>
+  </body>
+</html>

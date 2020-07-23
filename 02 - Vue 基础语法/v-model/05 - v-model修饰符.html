@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-model修饰符</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- 懒加载 lazy ,用户输入完成后才进行绑定-->
+      <input type="text" v-model.lazy="msg" /><br />
+      <!-- number -->
+      <input type="number" v-model.number="msg" /><br />
+      <h2>{{typeof msg}}</h2>
+      <!-- trim -->
+      <input type="text" v-model.lazy.trim="msg" />
+      <h2>{{msg}}</h2>
+    </div>
+
+    <script src="../../vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app", //绑定需要管理的element
+        data: {
+          msg: "hello Vue.js",
+        },
+        methods: {},
+      })
+    </script>
+  </body>
+</html>

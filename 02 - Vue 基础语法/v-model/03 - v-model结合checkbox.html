@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-model结合checkbox</title>
+</head>
+
+<body>
+    <div id="app">
+
+        <input type="checkbox" value="男" v-model="sexValue">男<br>
+        <input type="checkbox" value="女" v-model="sexValue">女<br>
+
+        <h2>你选择的是：{{sexValue}}</h2>
+    </div>
+
+    <script src="../../vue.js"></script>
+    <script>
+        const myApp = new Vue({
+            el: '#app',//绑定需要管理的element
+            data: {
+                msg: 'hello Vue.js',
+                sexValue: []
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>组件的基本使用</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- 3.使用组件 -->
+      <my-cpn>111</my-cpn>
+      <div>
+        <my-cpn></my-cpn>
+      </div>
+    </div>
+    <!-- 无效组件 -->
+    <my-cpn></my-cpn>
+    <script src="../../vue.js"></script>
+    <script>
+      //1.创建组件构造器对象
+      //es6 字符串使用 `` 可换行
+      //extend(亿克斯碳德)
+      const cpn = Vue.extend({
+        template: `
+            <div>
+            <h2>我是组件标题</h2>
+            <p>这是一个组件</p>
+            </div>
+            `,
+      })
+      //2.注册组件  component(肯剖能特)
+      //可以使用小驼峰也可以使用 杠 ‘-’
+      Vue.component("my-cpn", cpn)
+
+      const app = new Vue({
+        el: "#app",
+        data: {
+          msg: "hello Vue.js",
+        },
+      })
+    </script>
+  </body>
+</html>

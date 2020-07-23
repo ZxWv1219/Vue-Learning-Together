@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>全局组件和局部组件</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- 3.使用组件 -->
+      <my-cpn></my-cpn>
+    </div>
+    <div id="app1">
+      <!-- 3.使用组件 -->
+      <my-cpn></my-cpn>
+    </div>
+
+    <div id="app2">
+      <!-- 私有组件 -->
+      <my-cpn-privte></my-cpn-privte>
+    </div>
+    <script src="../../vue.js"></script>
+    <script>
+      //1.创建组件构造器对象
+      //es6 字符串使用 `` 可换行
+      const cpn = Vue.extend({
+        template: `
+              <div>
+              <h2>我是组件标题</h2>
+              <p>这是一个全局组件</p>
+              </div>
+              `,
+      })
+      const cpn2 = Vue.extend({
+        template: `
+              <div>
+              <h2>我是组件标题</h2>
+              <p>这是一个私有组件</p>
+              </div>
+              `,
+      })
+
+      //2.注册组件(全局组件，可以在多个vue实例下使用)
+      Vue.component("my-cpn", cpn)
+
+      const app = new Vue({
+        el: "#app",
+        data: {
+          msg: "hello Vue.js",
+        },
+      })
+      const app1 = new Vue({
+        el: "#app1",
+        data: {
+          msg: "hello Vue.js",
+        },
+      })
+
+      //局部组件
+      const app2 = new Vue({
+        el: "#app2",
+        data: {
+          msg: "hello Vue.js",
+        },
+        components: {
+          "my-cpn-privte": cpn2,
+        },
+      })
+    </script>
+  </body>
+</html>

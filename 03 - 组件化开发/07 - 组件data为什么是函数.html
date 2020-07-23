@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件中data为什么是一个函数</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 组件实例之间互不影响,数据不共享，因为data是个函数每次创建时都会返回一个新的对象 -->
+        <my-cpnf-template></my-cpnf-template>
+        <my-cpnf-template></my-cpnf-template>
+    </div>
+
+
+
+    <!-- template 标签 -->
+    <template id="cpn-template">
+        <div>
+            <h1>{{title}}</h1>
+            <h2>当前计数：{{counter}}</h2>
+            <button @click='btnSubtract()'>-</button>
+            <button @click='btnAdd()'>+</button>
+        </div>
+    </template>
+    <script src="../js/vue.js"></script>
+    <script>
+        // const obj = {
+        //     title: '我是组件里的title',
+        //     counter: 0
+        // }
+        //1.组件里面data必需是一个函数且返回一个对象，组件和VUE对象非常相似
+        //2.组件里面methods与Vue相同，都是一个对象
+        Vue.component('my-cpnf-template', {
+            template: '#cpn-template',
+            data() {
+                return {
+                    title: '我是组件里的title',
+                    counter: 0
+                }
+            },
+            methods: {
+                btnAdd() {
+                    this.counter++
+                },
+                btnSubtract() {
+                    this.counter--
+                }
+            }
+        })
+        const myApp = new Vue({
+            el: '#app',//绑定需要管理的element
+            data: {
+                msg: 'hello Vue.js'
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父传子组件之间的通信</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 使用组件 :props 里字段,若字段定义成驼峰,些处需要用'-'来分隔:pull-up-load-->
+        <my-cpnf :parentmsg='msg'></my-cpnf>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script>
+        //子组件
+        const cpns = Vue.extend({
+            template: `
+            <div>
+            <h2>我是子组件</h2>
+            <p>我是子组件</p>
+            </div>
+            `
+        })
+        //父组件
+        const cpnf = Vue.extend({
+            template: `
+            <div>
+            <h2>我是父组件</h2>
+            <p>我是父组件</p>
+            <div>{{parentmsg}}</div>
+            <my-cpns></my-cpns>
+            </div>`,
+            props: {
+                //接收父组件参数定义
+                //类型限制
+                // parentmsg: String
+                // parentmsg: [String,Number,自定义类型]          
+                parentmsg: {
+                    type: String,
+                    default: 'default value',
+                    required: false //是否为必填项 
+                },
+                parentLists: {
+                    type: Array,
+                    default() {
+                        return []
+                    }
+                },
+                // 自定义验证
+                parentValue: {
+                    validator(value) {
+                        return value > 1
+                    }
+                }
+
+            },
+            data() {
+                return {}
+            },
+            components: {
+                'my-cpns': cpns
+            }
+        })
+        //root
+        const myApp = new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello Vue.js'
+            },
+            components: {
+                'my-cpnf': cpnf
+            }
+        })
+    </script>
+</body>
+
+</html>

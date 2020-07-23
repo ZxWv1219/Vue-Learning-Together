@@ -176,7 +176,7 @@ v-pre 用于跳过这个元素和它子元素的编译过程，用于显示原�
 - 但是，除了内容需要动态来决定外，某些属性我们也希望动态来绑定。
   - 比如动态绑定 a 元素的 href 属性
   - 比如动态绑定 img 元素的 src 属性
-- 这个时候，我们可以使用 **v-bind** 指令： 
+- 这个时候，我们可以使用 **v-bind** 指令：
   - 作用：动态绑定属性
   - 缩写：**:**
   - 预期：any (with argument) | Object (without argument)
@@ -777,3 +777,68 @@ Vue 中包含了一组观察数组编译的方法，使用它们改变数组也�
 ## 购物车案例
 
 ![1595464630_1_.jpg](https://i.loli.net/2020/07/23/3e4kxpWHKtnmqSw.png)
+
+## 表单绑定 v-model
+
+- 表单控件在实际开发中是非常常见的。特别是对于用户信息的提交，需要大量的表单。
+- Vue 中使用 v-model 指令来实现表单元素和数据的双向绑定。
+- 案例的解析：
+  - 当我们在输入框输入内容时
+  - 因为 input 中的 v-model 绑定了 message，所以会实时将输入的内容传递给 message，message 发生改变。
+  - 当 message 发生改变时，因为上面我们使用 Mustache 语法，将 message 的值插入到 DOM 中，所以 DOM 会发生响应的改变。
+  - 所以，通过 v-model 实现了双向的绑定。
+  - 当然，我们也可以将 v-model 用于 textarea 元素
+
+### v-model 原理
+
+- v-model 其实是一个语法糖，它的背后本质上是包含两个操作：
+  - v-bind 绑定一个 value 属性
+  - v-on 指令给当前元素绑定 input 事件
+    也就是说下面的代码：等同于下面的代码：
+
+```html
+<body>
+  <div id="app">
+    <label>v-model方式</label>
+    <input type="text" v-model="msg" /><br />
+    <label>普通方式</label>
+    <input type="text" :value="msg" @input="valueChange($event)" /><br />
+    <label>{{msg}}</label>
+  </div>
+
+  <script src="../../vue.js"></script>
+  <script>
+    const myApp = new Vue({
+      el: "#app",
+      data: {
+        msg: "hello Vue.js",
+      },
+      methods: {
+        valueChange(event) {
+          this.msg = event.target.value
+        },
+      },
+    })
+  </script>
+</body>
+```
+
+下面通过示例给大家演式下用法, 因为都是组件使用不做过多说明
+
+- v-model：radio
+- v-model：checkbox
+- v-model：select
+
+### 修饰符
+
+- lazy 修饰符：
+  - 默认情况下，v-model 默认是在 input 事件中同步输入框的数据的。
+  - 也就是说，一旦有数据发生改变对应的 data 中的数据就会自动发生改变。
+  - lazy 修饰符可以让数据在失去焦点或者回车时才会更新：
+- number 修饰符：
+  - 默认情况下，在输入框中无论我们输入的是字母还是数字，都会被当做字符串类型进行处理。
+  - 但是如果我们希望处理的是数字类型，那么最好直接将内容当做数字处理。
+  - number 修饰符可以让在输入框中输入的内容自动转成数字类型：
+- trim 修饰符：
+  - 如果输入的内容首尾有很多空格，通常我们希望将其去除
+  - trim 修饰符可以过滤内容左右两边的空格

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>组件的简写注册方式</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- 使用组件 -->
+      <my-cpnf></my-cpnf>
+    </div>
+    <script src="../../vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          msg: "hello Vue.js",
+        },
+        components: {
+          "my-cpnf": {
+            template: `
+                    <div>
+                    <h2>我是组件</h2>
+                    <p>我是组件</p>
+                    </div>
+                    `,
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

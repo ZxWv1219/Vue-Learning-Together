@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14 - 子组件访问父</title>
+</head>
+
+<body>
+    <div id="app">
+
+        <cpn></cpn>
+
+    </div>
+
+    <!-- template 标签 -->
+    <template id="cpnTemplate">
+        <div>
+            <h2>我是子组件</h2>
+            <h2>{{myMsg}}</h2>
+            <button @click='btnClick'>打印</button>
+        </div>
+
+    </template>
+    <script src="../js/vue.js"></script>
+    <script>
+        //父组件
+        const myApp = new Vue({
+            el: '#app',//绑定需要管理的element
+            data: {
+                msg: 'hello vue'
+            },
+            methods: {
+                showMsg() {
+                    console.log(this.msg)
+                }
+            },
+            components: {
+                cpn: {
+                    template: '#cpnTemplate',
+                    data() {
+                        return {
+                            //可以这样做，但不建议这样做，违背组件化思想
+                            myMsg: this.$parent.msg
+                        }
+                    },
+                    props: {
+
+                    },
+                    methods: {
+                        btnClick() {
+                            console.log(this.$parent)
+                            this.$parent.showMsg()
+                            //访问根组件使用$root
+                        }
+                    },
+                    //使用watch(沃区)监听属性，属性名称与data里面名称一致
+                    watch: {
+
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>子传父通信</title>
+</head>
+
+<body>
+    <div id="app">
+        <cpn :number1='no1' :number2='no2' @num1change='setno1'  @num2change='setno2'></cpn>
+    </div>
+
+    <!-- template 标签 -->
+    <template id="cpnTemplate">
+        <div>
+            <h2>{{number1}}</h2>
+            <h2>{{cnumber1}}</h2>
+            <!-- 官方不建议双向绑定props修改父组件数据 -->
+            <input type="number" v-model="cnumber1" @input='no1input'>
+            <h2>{{number2}}</h2>
+            <h2>{{cnumber2}}</h2>
+            <input type="number" v-model="cnumber2" @input='no2input'>
+        </div>
+    </template>
+    <script src="../js/vue.js"></script>
+    <script>
+        //父组件
+        const myApp = new Vue({
+            el: '#app',//绑定需要管理的element
+            data: {
+                no1: 0,
+                no2: 1
+            },
+            methods: {
+                setno1(value) {
+                    this.no1 = Number(value)
+                },
+                setno2(value) {
+                    this.no2 = Number(value)                    
+                }
+            },
+            components: {
+                cpn: {
+                    template: '#cpnTemplate',
+                    data() {
+                        return {
+                            cnumber1: this.number1,
+                            cnumber2: this.number2
+                        }
+                    },
+                    props: {
+                        number1: Number,
+                        number2: Number
+                    },
+                    methods: {
+                        no1input(event) {
+                            this.$emit('num1change', event.target.value)
+                        },
+                        no2input(event) {
+                            this.$emit('num2change', event.target.value)
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

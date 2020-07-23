@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件的简写注册方式</title>
+</head>
+
+<body>
+    <div id="app">
+        <my-cpnf></my-cpnf>
+        <my-cpnf-template></my-cpnf-template>
+    </div>
+
+    <!-- 1.script 标签,类型必需是 text/x-template -->
+    <script type="text/x-template" id="cpn">
+        <!-- 创建组件时必须包含一个 root 标签 像是div,lable等-->
+    <div>
+        <h2>我是组件script</h2>
+        <p>我是组件script</p>
+    </div>
+    </script>
+
+    <!-- template 标签 -->
+    <template id="cpn-template">
+        <div>
+            <h2>我是组件template</h2>
+            <p>我是组件template</p>
+        </div>
+    </template>
+    <script src="../js/vue.js"></script>
+    <script>
+
+        Vue.component('my-cpnf', {
+            template: '#cpn'
+        })
+        Vue.component('my-cpnf-template', {
+            template: '#cpn-template'
+        })
+        const myApp = new Vue({
+            el: '#app',//绑定需要管理的element
+            data: {
+                msg: 'hello Vue.js'
+            }
+        })
+    </script>
+</body>
+
+</html>

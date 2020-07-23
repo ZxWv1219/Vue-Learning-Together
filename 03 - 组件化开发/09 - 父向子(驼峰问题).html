@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父向子(驼峰问题)</title>
+</head>
+
+<body>
+    <div id="app">
+        <cpn1 :s-data='rootData'></cpn1>
+        <cpn2 :tdata='rootData'></cpn2>
+    </div>
+
+    <!-- 1.script 标签,类型必需是 text/x-template -->
+    <script type="text/x-template" id="cpnScript">
+        <div>
+            <h2>我是组件cpnScript</h2>
+            <p>我是组件cpnScript</p>
+            <div>{{sData}}</div>
+        </div>
+    </script>
+
+    <!-- template 标签 -->
+    <template id="cpnTemplate">
+        <div>
+            <h2>我是组件cpnTemplate</h2>
+            <p>我是组件cpnTemplate</p>
+            <div>{{tdata}}</div>
+        </div>
+    </template>
+    <script src="../js/vue.js"></script>
+    <script>
+
+        const cpn1 = {
+            template: '#cpnScript',
+            props: {
+                //v-bind:xxx字段定义是不支持驼峰，如果字段使用了驼峰，标签里需要使用-替代驼峰  例:  sData 对应标签里 :s-data
+                sData: {
+                    type: Object,
+                    default() {
+                        return { name: 'script' }
+                    }
+                }
+            }
+        }
+        const cpn2 = {
+            template: '#cpnTemplate',
+            props: {
+                tdata: {
+                    type: Object,
+                    default() {
+                        return { name: 'template' }
+                    }
+                }
+            }
+        }
+        const myApp = new Vue({
+            el: '#app',//绑定需要管理的element
+            data: {
+                msg: 'hello Vue.js',
+                rootData: {
+                    name: '张无忌',
+                    age: '18',
+                    height: '1.88'
+                }
+            },
+            components: {
+                cpn1,
+                cpn2
+            }
+        })
+    </script>
+</body>
+
+</html>
