@@ -1,93 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>子传父通信</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="app">
-        <!-- 注意这里的事件名称使用小写，后期使用脚手架时在使用驼峰 -->
-        <cpn :tdata='rootData' @itemclick='onReceive' @itemclick1='onReceive1'></cpn>
+      <!-- 注意这里的事件名称使用小写，后期使用脚手架时在使用驼峰 -->
+      <cpn
+        :tdata="rootData"
+        @itemclick="onReceive"
+        @itemclick1="onReceive1"
+      ></cpn>
 
-        <h2>接收子组件传过来的值</h2>
-        <h2>{{receiveData}}</h2>
+      <h2>接收子组件传过来的值</h2>
+      <h2>{{receiveData}}</h2>
     </div>
 
     <!-- template 标签 -->
     <template id="cpnTemplate">
-        <div>
-            <h2>我是组件cpnTemplate</h2>
-            <p>我是组件cpnTemplate</p>
-            <div>{{tdata}}</div>
-            <p v-for="(item, index) in categories" :key="index">
-                <button @click='btnClick(item)'>{{item.name}}</button>
-            </p>
-            <h2>我的选择：<br>{{obj}}</h2>
-        </div>
+      <div>
+        <h2>我是组件cpnTemplate</h2>
+        <p>我是组件cpnTemplate</p>
+        <div>{{tdata}}</div>
+        <p v-for="(item, index) in categories" :key="index">
+          <button @click="btnClick(item)">{{item.name}}</button>
+        </p>
+        <h2>我的选择：<br />{{obj}}</h2>
+      </div>
     </template>
-    <script src="../js/vue.js"></script>
+    <script src="../../vue.js"></script>
     <script>
-
-        //子组件
-        const cpn = {
-            template: '#cpnTemplate',
-            data() {
-                return {
-                    //凯特国瑞斯
-                    categories: [
-                        { id: '1', name: '热门' },
-                        { id: '2', name: '家用' },
-                        { id: '3', name: '数码' }
-                    ],
-                    obj: null
-                }
+      //子组件
+      const cpn = {
+        template: "#cpnTemplate",
+        data() {
+          return {
+            //凯特国瑞斯
+            categories: [
+              { id: "1", name: "热门" },
+              { id: "2", name: "家用" },
+              { id: "3", name: "数码" },
+            ],
+            obj: null,
+          }
+        },
+        methods: {
+          btnClick(item) {
+            this.obj = item
+            //使用 伊密特 向父组件发送事件请求，注意这里的事件名称使用小写
+            //但是CLI项目中不会有小驼峰的问题
+            this.$emit("itemclick", item)
+            this.$emit("itemclick1", { name: "我是张无忌" })
+          },
+        },
+        props: {
+          tdata: {
+            type: Object,
+            default() {
+              return { name: "template" }
             },
-            methods: {
-                btnClick(item) {
-                    this.obj = item
-                    //使用 伊密特 向父组件发送事件请求，注意这里的事件名称使用小写
-                    this.$emit('itemclick', item)
-                    this.$emit('itemclick1', { name: '我是张无忌' })
-                }
-            },
-            props: {
-                tdata: {
-                    type: Object,
-                    default() {
-                        return { name: 'template' }
-                    }
-                }
-            }
-        }
-        //父组件
-        const myApp = new Vue({
-            el: '#app',//绑定需要管理的element
-            data: {
-                msg: 'hello Vue.js',
-                rootData: {
-                    name: '张无忌',
-                    age: '18',
-                    height: '1.88'
-                },
-                receiveData: null
-            },
-            components: {
-                cpn
-            },
-            methods: {
-                onReceive(item) {
-                    this.receiveData = item
-                },
-                onReceive1(item1) {
-                    console.log(item1)
-                    // this.receiveData = item
-                }
-            }
-        })
+          },
+        },
+      }
+      //父组件
+      const myApp = new Vue({
+        el: "#app", //绑定需要管理的element
+        data: {
+          msg: "hello Vue.js",
+          rootData: {
+            name: "张无忌",
+            age: "18",
+            height: "1.88",
+          },
+          receiveData: null,
+        },
+        components: {
+          cpn,
+        },
+        methods: {
+          onReceive(item) {
+            this.receiveData = item
+          },
+          onReceive1(item1) {
+            console.log(item1)
+            // this.receiveData = item
+          },
+        },
+      })
     </script>
-</body>
-
+  </body>
 </html>

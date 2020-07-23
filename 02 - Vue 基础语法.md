@@ -801,8 +801,8 @@ Vue 中包含了一组观察数组编译的方法，使用它们改变数组也�
   <div id="app">
     <label>v-model方式</label>
     <input type="text" v-model="msg" /><br />
-    <label>普通方式</label>
-    <input type="text" :value="msg" @input="valueChange($event)" /><br />
+    <!-- <label>普通方式</label>
+    <input type="text" :value="msg" @input="valueChange($event)" /><br /> -->
     <label>{{msg}}</label>
   </div>
 
