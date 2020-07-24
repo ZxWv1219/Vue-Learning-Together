@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>03 - 什么是编译作用域</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <cpn v-show="isShow"> </cpn>
+    </div>
+
+    <!-- template 标签 -->
+    <template id="cpnTemplate">
+      <div>
+        <h2>我是子组件</h2>
+        <p>哇哈哈哈</p>
+      </div>
+    </template>
+    <script src="../../vue.js"></script>
+    <script>
+      const myApp = new Vue({
+        el: "#app",
+        data: {
+          msg: "hello vue",
+          isShow: true,
+        },
+        methods: {},
+        components: {
+          cpn: {
+            template: "#cpnTemplate",
+            data() {
+              return {
+                isShow: false,
+              }
+            },
+            props: {},
+            methods: {
+              btnClick() {
+                console.log("btnClick")
+              },
+            },
+            //使用watch(沃区)监听属性，属性名称与data里面名称一致
+            watch: {},
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

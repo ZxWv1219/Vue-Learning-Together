@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>04 - 作用域插槽的案例</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <cpn>
+        <!-- 定义变量slotData(可以自定义)接收作用域 value-->
+        <template v-slot:slot1="slotData">
+          <span v-for="(item, index) in slotData.data" :key="item"
+            >{{item}} 新写法<br
+          /></span>
+        </template>
+      </cpn>
+      <div>
+        ==========================华丽的分割线==========================
+      </div>
+      <!-- 空组件 -->
+      <cpn></cpn>
+
+      <div>
+        ==========================华丽的分割线==========================
+      </div>
+
+      <cpn>
+        <!-- 过时写法,定义变量slotData(可以自定义)接收作用域 value-->
+        <div slot-scope="slotData" slot="slot1">
+          <span v-for="(item, index) in slotData.data" :key="item"
+            >{{item}} 过时写法<br
+          /></span>
+        </div>
+      </cpn>
+    </div>
+
+    <!-- template 标签 -->
+    <template id="cpnTemplate">
+      <div>
+        <!-- 作用域传值 ,定义一个data(可以自定义)接收languages的值-->
+        <!-- 其实就是挂载一个值在插槽上 -->
+        <slot name="slot1" :data="languages">
+          <ul>
+            <li v-for="(item, index) in languages" :key="item">{{item}}</li>
+          </ul>
+        </slot>
+      </div>
+    </template>
+
+    <script src="../../vue.js"></script>
+    <script>
+      const myApp = new Vue({
+        el: "#app",
+        data: {
+          msg: "hello vue",
+          isShow: true,
+        },
+        methods: {},
+        components: {
+          cpn: {
+            template: "#cpnTemplate",
+            data() {
+              return {
+                languages: ["JavaScript", "C", "C++", "C#", "Java", "Python"],
+              }
+            },
+            props: {},
+            methods: {
+              btnClick() {
+                console.log("btnClick")
+              },
+            },
+            //使用watch(沃区)监听属性，属性名称与data里面名称一致
+            watch: {},
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

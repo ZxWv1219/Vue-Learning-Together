@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>02 - slot具名插槽</title>
+    <style></style>
+  </head>
+
+  <body>
+    <div id="app">
+      <cpn>
+        <template v-slot:left>
+          <p>左边left p</p>
+        </template>
+        <!-- 过时写法 -->
+        <h2 slot="mid">中间mid h2</h2>
+        <div slot="right">右边right div</div>
+      </cpn>
+    </div>
+
+    <!-- template 标签 -->
+    <template id="cpnTemplate">
+      <div>
+        <slot name="left"><span>左</span></slot>
+        <slot name="mid"><span>中</span></slot>
+        <slot name="right"><span>右</span></slot>
+      </div>
+    </template>
+    <script src="../../vue.js"></script>
+    <script>
+      const myApp = new Vue({
+        el: "#app",
+        data: {
+          msg: "hello vue",
+        },
+        methods: {},
+        components: {
+          cpn: {
+            template: "#cpnTemplate",
+            data() {
+              return {}
+            },
+            props: {},
+            methods: {
+              btnClick() {
+                console.log("btnClick")
+              },
+            },
+            //使用watch(沃区)监听属性，属性名称与data里面名称一致
+            watch: {},
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01 - 组件插槽slot的基本使用</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <cpn><button>打印</button></cpn>
+
+      <div>
+        ==========================华丽的分割线==========================
+      </div>
+
+      <cpn>
+        <h2>打印h2</h2>
+        <p>打印p</p>
+        <div>打印div</div>
+      </cpn>
+
+      <div>
+        ==========================华丽的分割线==========================
+      </div>
+
+      <cpn></cpn>
+    </div>
+
+    <!-- template 标签 -->
+    <template id="cpnTemplate">
+      <div>
+        <h2>我是子组件</h2>
+        <slot>
+          <h2>哇哈哈哈</h2>
+        </slot>
+      </div>
+    </template>
+
+    <script src="../../vue.js"></script>
+    <script>
+      const myApp = new Vue({
+        el: "#app",
+        data: {
+          msg: "hello vue",
+        },
+        methods: {},
+        components: {
+          cpn: {
+            template: "#cpnTemplate",
+            data() {
+              return {}
+            },
+            props: {},
+            methods: {
+              btnClick() {
+                console.log("btnClick")
+              },
+            },
+            //使用watch(沃区)监听属性，属性名称与data里面名称一致
+            watch: {},
+          },
+        },
+      })
+    </script>
+  </body>
+</html>
